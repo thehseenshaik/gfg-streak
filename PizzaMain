@@ -1,0 +1,27 @@
+class Solution {
+    public int minimumCost(int x, int s, int m, int l, int cs, int cm, int cl) {
+        int ans = Integer.MAX_VALUE;
+
+        for (int i = 0; i <= x / s + 1; i++) {
+            for (int j = 0; j <= x / m + 1; j++) {
+
+                int area = i * s + j * m;
+                int cost = i * cs + j * cm;
+
+                if (area >= x) {
+                    ans = Math.min(ans, cost);
+                } else {
+                    int remaining = x - area;
+
+                    int large = (remaining + l - 1) / l;
+
+                    cost += large * cl;
+
+                    ans = Math.min(ans, cost);
+                }
+            }
+        }
+
+        return ans;
+    }
+}
